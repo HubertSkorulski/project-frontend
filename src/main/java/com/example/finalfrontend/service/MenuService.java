@@ -13,13 +13,13 @@ public class MenuService {
         this.webClient = webClientBuilder.baseUrl("http://localhost:8080/v1/menu/").build();
     }
 
-    public DishDto[] prepareMenu() {
+    public void prepareMenu() {
 
-        return this.webClient
+        this.webClient
                 .get()
                 .uri("")
                 .retrieve()
-                .bodyToMono(DishDto[].class)
+                .bodyToMono(Void.class)
                 .block();
     }
 }

@@ -1,5 +1,6 @@
 package com.example.finalfrontend.views;
 
+import com.example.finalfrontend.service.DishService;
 import com.example.finalfrontend.service.MenuService;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.Unit;
@@ -10,26 +11,23 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.component.textfield.TextFieldVariant;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import org.springframework.beans.factory.annotation.Autowired;
 
 @PageTitle("Welcome page")
-@Route(value = "", layout = BaseLayout.class)
+@Route(value = "")
 public class StartingView extends VerticalLayout {
 
     TextField textField = new TextField();
     Button button = new Button("Składanie zamówienia");
 
-    @Autowired
-    private final MenuService menuService;
-
-
-    public StartingView(MenuService menuService) {
-        this.menuService = menuService;
+    public StartingView(MenuService menuService, DishService dishService) {
         this.setAlignItems(FlexComponent.Alignment.CENTER);
-
         prepareTextField();
-        menuService.prepareMenu();
-        button.addClickListener(event -> UI.getCurrent().navigate("createOrder"));
+        button.addClickListener(event -> {
+            if (dishService.getDishes().length < 10) {
+                menuService.prepareMenu();
+            };
+            UI.getCurrent().navigate("createOrder");
+        });
         add(textField,button);
     }
 

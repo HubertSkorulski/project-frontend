@@ -34,6 +34,16 @@ public class CartService {
 
     }
 
+    public CartDto updateDishServings(String dishName, Long cartId, int newQuantity) {
+        return this.webClient
+                .put()
+                .uri("updateCart/" + cartId + "/" + dishName + "/" + newQuantity)
+                .retrieve()
+                .bodyToMono(CartDto.class)
+                .block();
+
+    }
+
     public CartRowDto[] getCartRows(Long cartId) {
         return this.webClient
                 .get()

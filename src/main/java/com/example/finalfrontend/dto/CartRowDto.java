@@ -17,10 +17,4 @@ public class CartRowDto {
 
     @JsonProperty("unitPrice")
     private double unitPrice;
-
-    /*public CartRow(DishDto dishDto, int quantity) {
-        this.dishDto = dishDto;
-        this.quantity = quantity;
-        this.price = quantity * dishDto.getPrice();
-    }*/
 }

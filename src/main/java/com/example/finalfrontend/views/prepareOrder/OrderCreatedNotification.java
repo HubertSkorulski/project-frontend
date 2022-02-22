@@ -1,4 +1,4 @@
-package com.example.finalfrontend.views;
+package com.example.finalfrontend.views.prepareOrder;
 
 import com.example.finalfrontend.dto.OrderDto;
 import com.vaadin.flow.component.Text;

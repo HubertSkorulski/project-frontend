@@ -1,4 +1,4 @@
-package com.example.finalfrontend.views;
+package com.example.finalfrontend.views.prepareOrder;
 
 import com.example.finalfrontend.dto.CustomerDto;
 import com.example.finalfrontend.service.CustomerService;

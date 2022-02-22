@@ -1,9 +1,10 @@
-package com.example.finalfrontend.views;
+package com.example.finalfrontend.views.prepareOrder;
 
 import com.example.finalfrontend.dto.CartDto;
 import com.example.finalfrontend.dto.DishDto;
 import com.example.finalfrontend.service.CartService;
 import com.example.finalfrontend.service.DishService;
+import com.example.finalfrontend.views.prepareOrder.CartSummary;
 import com.vaadin.flow.component.Unit;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Label;
@@ -12,7 +13,9 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.IntegerField;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 public class ListOfDishesWithAddButtons extends VerticalLayout {
@@ -33,7 +36,8 @@ public class ListOfDishesWithAddButtons extends VerticalLayout {
         this.cartDto = cartDto;
         this.cartService = cartService;
 
-        dishes = Arrays.asList(dishService.getDishes());
+        dishes = Arrays.asList(dishService.getDishes()).stream()
+                .sorted(Comparator.comparing(DishDto::getName)).collect(Collectors.toList());
         rowNumber = dishes.size();
         add(prepareLayout());
 

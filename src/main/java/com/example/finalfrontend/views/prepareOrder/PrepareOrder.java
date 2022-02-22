@@ -1,9 +1,10 @@
-package com.example.finalfrontend.views;
+package com.example.finalfrontend.views.prepareOrder;
 
 import com.example.finalfrontend.dto.CartDto;
 import com.example.finalfrontend.dto.CustomerDto;
 import com.example.finalfrontend.dto.OrderDto;
 import com.example.finalfrontend.service.*;
+import com.example.finalfrontend.views.BaseLayout;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
