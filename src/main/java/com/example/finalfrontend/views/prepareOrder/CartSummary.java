@@ -8,7 +8,6 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.grid.ColumnTextAlign;
 import com.vaadin.flow.component.grid.Grid;
-import com.vaadin.flow.component.grid.GridVariant;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -16,7 +15,6 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.IntegerField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.component.textfield.TextFieldVariant;
-import com.vaadin.flow.data.renderer.ComponentRenderer;
 
 
 public class CartSummary extends VerticalLayout {
@@ -69,7 +67,6 @@ public class CartSummary extends VerticalLayout {
         }).setHeader("Usuń").setWidth("4.7em").setFlexGrow(0).setTextAlign(ColumnTextAlign.CENTER);
 
         grid.setWidth(  600,Unit.PIXELS);
-        //grid.addThemeVariants(GridVariant.LUMO_COLUMN_BORDERS);
     }
 
     private void setGridButton(Button button, CartRowDto cartRowDto) {

@@ -12,7 +12,7 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-
+import org.springframework.beans.factory.annotation.Autowired;
 
 
 @PageTitle("Create Order")
@@ -21,45 +21,36 @@ public class PrepareOrder extends HorizontalLayout {
 
     CartDto cartDto;
     CreateCustomerForm createCustomerForm;
-    ListOfDishesWithAddButtons listWithButtons;
+    GroupsAccordion groupsAccordion;
     CartSummary cartSummary;
     Button confirmationButton = new Button("Złóż zamówienie");
     CustomerDto customerDto;
     OrderDto orderDto;
+
+    @Autowired
     OrderCreatedNotification orderCreatedNotification;
 
-
-    private final CartService cartService;
     private final OrderService orderService;
-    private final CustomerService customerService;
-    private final DishService dishService;
     private final ConfirmationService confirmationService;
     private final NotFilledFormNotification notFilledFormNotification;
 
 
-    public PrepareOrder(CartService cartService, OrderService orderService, CustomerService customerService, DishService dishService, ConfirmationService confirmationService, NotFilledFormNotification notFilledFormNotification) {
-        this.cartService = cartService;
+    public PrepareOrder(CartService cartService, OrderService orderService, CustomerService customerService, DishService dishService, ConfirmationService confirmationService, NotFilledFormNotification notFilledFormNotification, GroupService groupService) {
         this.orderService = orderService;
-        this.customerService = customerService;
-        this.dishService = dishService;
         this.confirmationService = confirmationService;
         this.notFilledFormNotification = notFilledFormNotification;
 
         cartDto = cartService.createCart();
-
-        createCustomerForm = new CreateCustomerForm(customerService); //przerobić na beana?
-        createCustomerForm.setVisible(false);
-
+        createCustomerForm = new CreateCustomerForm(customerService);
         cartSummary = new CartSummary(cartService, cartDto);
         cartSummary.prepareMoveButton(createCustomerForm);
 
-        listWithButtons = new ListOfDishesWithAddButtons(cartDto ,cartSummary,dishService,cartService);
-        orderCreatedNotification = new OrderCreatedNotification();
+        groupsAccordion = new GroupsAccordion(cartDto, groupService, dishService, cartService, cartSummary);
         setButton();
         VerticalLayout gridWithButton = new VerticalLayout();
-        gridWithButton.add(cartSummary, createCustomerForm, confirmationButton); //tu dodać buttonsy przecież
+        gridWithButton.add(cartSummary, createCustomerForm, confirmationButton);
 
-        add(listWithButtons);
+        add(groupsAccordion);
         add(gridWithButton);
     }
 

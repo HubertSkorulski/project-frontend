@@ -7,9 +7,8 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.EmailField;
 import com.vaadin.flow.component.textfield.TextField;
-import org.springframework.stereotype.Service;
 
-@Service
+
 public class CreateCustomerForm extends VerticalLayout {
 
     TextField name = new TextField("Imię");
@@ -29,6 +28,7 @@ public class CreateCustomerForm extends VerticalLayout {
                 emailAddress
         );
         add(horizontalLayout);
+        setVisible(false);
     }
 
     public CustomerDto createCustomer() {

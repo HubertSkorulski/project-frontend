@@ -11,8 +11,9 @@ import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import org.springframework.stereotype.Component;
 
-
+@Component
 public class OrderCreatedNotification extends Notification {
 
     Button closeButton = new Button(new Icon("lumo","cross"));
