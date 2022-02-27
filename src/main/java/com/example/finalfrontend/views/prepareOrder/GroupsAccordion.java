@@ -19,6 +19,8 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.IntegerField;
 import com.vaadin.flow.component.textfield.TextFieldVariant;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 import java.util.List;
@@ -28,8 +30,11 @@ public class GroupsAccordion extends VerticalLayout {
     List<GroupDto> groups;
     List<DishDto> dishes;
     private final CartSummary cartSummary;
-    private final CartService cartService;
+
     private final CartDto cartDto;
+
+
+    private CartService cartService;
 
     public GroupsAccordion(CartDto cartDto, GroupService groupService, DishService dishService, CartService cartService, CartSummary cartSummary) {
         this.cartService = cartService;

@@ -23,45 +23,42 @@ public class PrepareOrder extends HorizontalLayout {
     CreateCustomerForm createCustomerForm;
     GroupsAccordion groupsAccordion;
     CartSummary cartSummary;
-    Button confirmationButton = new Button("Złóż zamówienie");
-    CustomerDto customerDto;
-    OrderDto orderDto;
+
 
     @Autowired
     OrderCreatedNotification orderCreatedNotification;
+    @Autowired
+    NotFilledFormNotification notFilledFormNotification;
+    @Autowired
+    private OrderService orderService;
+    @Autowired
+    private ConfirmationService confirmationService;
 
-    private final OrderService orderService;
-    private final ConfirmationService confirmationService;
-    private final NotFilledFormNotification notFilledFormNotification;
 
-
-    public PrepareOrder(CartService cartService, OrderService orderService, CustomerService customerService, DishService dishService, ConfirmationService confirmationService, NotFilledFormNotification notFilledFormNotification, GroupService groupService) {
-        this.orderService = orderService;
-        this.confirmationService = confirmationService;
-        this.notFilledFormNotification = notFilledFormNotification;
-
+    public PrepareOrder(CartService cartService, CustomerService customerService, DishService dishService, GroupService groupService) {
         cartDto = cartService.createCart();
         createCustomerForm = new CreateCustomerForm(customerService);
         cartSummary = new CartSummary(cartService, cartDto);
         cartSummary.prepareMoveButton(createCustomerForm);
 
         groupsAccordion = new GroupsAccordion(cartDto, groupService, dishService, cartService, cartSummary);
-        setButton();
+
         VerticalLayout gridWithButton = new VerticalLayout();
-        gridWithButton.add(cartSummary, createCustomerForm, confirmationButton);
+        gridWithButton.add(cartSummary, createCustomerForm, confirmOrderButton());
 
         add(groupsAccordion);
         add(gridWithButton);
     }
 
-    private void setButton() {
+    private Button confirmOrderButton() {
+        Button confirmationButton = new Button("Złóż zamówienie");
         confirmationButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         confirmationButton.addClickShortcut(Key.ENTER);
 
         confirmationButton.addClickListener(event -> {
             if (createCustomerForm.isFilled()) {
-                customerDto = createCustomerForm.createCustomer();
-                orderDto = orderService.createOrder(cartDto.getId(),customerDto.getId());
+                CustomerDto customerDto = createCustomerForm.createCustomer();
+                OrderDto orderDto = orderService.createOrder(cartDto.getId(),customerDto.getId());
                 String sentConfirmation = confirmationService.sentConfirmation(orderDto.getId());
                 System.out.println(sentConfirmation);
                 orderCreatedNotification.show(orderDto);
@@ -69,6 +66,7 @@ public class PrepareOrder extends HorizontalLayout {
                 notFilledFormNotification.show();
             }
         });
+        return confirmationButton;
     }
 
 }
