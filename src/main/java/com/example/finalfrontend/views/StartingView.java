@@ -1,7 +1,6 @@
 package com.example.finalfrontend.views;
 
-import com.example.finalfrontend.service.DishService;
-import com.example.finalfrontend.service.MenuService;
+
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.Unit;
 import com.vaadin.flow.component.button.Button;
@@ -19,13 +18,10 @@ public class StartingView extends VerticalLayout {
     TextField textField = new TextField();
     Button button = new Button("Składanie zamówienia");
 
-    public StartingView(MenuService menuService, DishService dishService) {
+    public StartingView() {
         this.setAlignItems(FlexComponent.Alignment.CENTER);
         prepareTextField();
         button.addClickListener(event -> {
-            if (dishService.getDishes().length < 10) {
-                menuService.prepareMenu();
-            };
             UI.getCurrent().navigate("createOrder");
         });
         add(textField,button);

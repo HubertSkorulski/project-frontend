@@ -17,12 +17,11 @@ public class ConfirmationPage extends VerticalLayout {
     TextField textField = new TextField();
     Button button = new Button("Złóż nowe zamówienie");
 
-
     public ConfirmationPage() {
         setAlignItems(Alignment.CENTER);
         addClickListener();
         prepareTextField();
-        add(textField,button);
+        add(textField, button);
     }
 
     private void prepareTextField() {

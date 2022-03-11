@@ -7,17 +7,13 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.EmailField;
 import com.vaadin.flow.component.textfield.TextField;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 public class CreateCustomerForm extends VerticalLayout {
 
     TextField name = new TextField("Imię");
     TextField surname = new TextField("Nazwisko");
     EmailField emailAddress = new EmailField("Email");
-
     private final CustomerService customerService;
-
 
     public CreateCustomerForm(CustomerService customerService) {
         this.customerService = customerService;
@@ -46,10 +42,6 @@ public class CreateCustomerForm extends VerticalLayout {
     }
 
     public boolean isFilled() {
-        if (!name.isEmpty() & !surname.isEmpty() & !emailAddress.isEmpty()) {
-            return true;
-        } else  {
-            return false;
-        }
+        return !name.isEmpty() & !surname.isEmpty() & !emailAddress.isEmpty();
     }
 }

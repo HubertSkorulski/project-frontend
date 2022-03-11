@@ -34,11 +34,10 @@ public class DishesGrid extends VerticalLayout {
     Button closeButton = new Button(new Icon("lumo","cross"));
     TextField filter = new TextField();
     private final DishService dishService;
-    //private final GroupService groupService;
+
 
 
     public DishesGrid(DishService dishService, GroupService groupService) {
-        //this.groupService = groupService;
         this.dishService = dishService;
         dishUpdateForm = new DishUpdateForm(groupService);
         updateGrid();
@@ -145,7 +144,6 @@ public class DishesGrid extends VerticalLayout {
             formWithButtons.setVisible(false);
             dishUpdateForm.clear();
         });
-
     }
 
     private void setNewDishButton() {
